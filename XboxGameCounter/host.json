@@ -1,5 +1,19 @@
 {
     "version": "2.0",
+    "extensions": {
+        "http": {
+            "routePrefix": "api",
+            "maxOutstandingRequests": 100,
+            "maxConcurrentRequests": 50,
+            "dynamicThrottlesEnabled": true
+        },
+        "durableTask": {
+            "hubName": "DurableFunctionsHub",
+            "maxConcurrentActivityFunctions": 10,
+            "maxConcurrentOrchestratorFunctions": 10
+
+        }
+    },
     "logging": {
         "applicationInsights": {
             "samplingSettings": {
