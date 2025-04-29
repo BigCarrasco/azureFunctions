@@ -1,8 +1,8 @@
-using Company.Function.Models;
+using Company.Function.Domain.Models;
 using System.Net.Http;
 using System.Text.Json;
 
-namespace Company.Function.Services;
+namespace Company.Function.Application.Services;
 public class XboxGameService
 {
     private readonly HttpClient _httpClient;
@@ -19,7 +19,7 @@ public class XboxGameService
 
         if (!apiResponse.IsSuccessStatusCode)
         {
-            return 0; //agrregar más
+            return 0; //agrregar o mejorar
         }
 
         var content = await apiResponse.Content.ReadAsStringAsync();

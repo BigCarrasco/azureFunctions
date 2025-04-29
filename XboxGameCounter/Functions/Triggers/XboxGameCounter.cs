@@ -5,10 +5,10 @@ using System.Net;
 using System.Net.Http;
 using System.Text.Json;
 
-using Company.Function.Models;
-using Company.Function.Services;
+using Company.Function.Domain.Models;
+using Company.Function.Application.Services;
 
-namespace Company.Function.functions;
+namespace Company.Function.functions.Triggers;
 public class XboxGameCounter
 {
     private readonly ILogger<XboxGameCounter> _logger;

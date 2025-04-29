@@ -1,4 +1,4 @@
-namespace Company.Function.Models;
+namespace Company.Function.Domain.Models;
 
 public class Game
 {
