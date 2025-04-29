@@ -1,4 +1,5 @@
 using Company.Function.Domain.Models;
+using Microsoft.Extensions.Logging;
 using System.Net.Http;
 using System.Text.Json;
 
@@ -6,10 +7,13 @@ namespace Company.Function.Application.Services;
 public class XboxGameService
 {
     private readonly HttpClient _httpClient;
+    private readonly ILogger<XboxGameService> _logger;
 
-    public XboxGameService()
+    public XboxGameService(HttpClient httpClient, ILogger<XboxGameService> logger)
     {
-        _httpClient = new HttpClient();
+        _httpClient = httpClient;
+        _logger = logger;
+
     }
 
     public async Task<int> GetTotalGamesAsync()
@@ -19,6 +23,7 @@ public class XboxGameService
 
         if (!apiResponse.IsSuccessStatusCode)
         {
+            _logger.LogError("API FAILED WITH STATUS {statuscode}", apiResponse.StatusCode);
             return 0; //agrregar o mejorar
         }
 
