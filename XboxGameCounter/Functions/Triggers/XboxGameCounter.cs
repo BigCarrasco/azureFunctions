@@ -8,11 +8,12 @@ using System.Text.Json;
 using Company.Function.Domain.Models;
 using Company.Function.Application.Services;
 
-namespace Company.Function.functions.Triggers;
+namespace Company.Function.Functions.Triggers;
 public class XboxGameCounter
 {
     private readonly ILogger<XboxGameCounter> _logger;
-    private readonly XboxGameService _xboxGameService; // Inyectamos el servicio
+    private readonly XboxGameService _xboxGameService;// inyeccion del servicio
+
 
     public XboxGameCounter(ILogger<XboxGameCounter> logger, XboxGameService xboxGameService)
     {
