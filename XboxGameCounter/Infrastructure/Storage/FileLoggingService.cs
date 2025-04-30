@@ -5,26 +5,40 @@ namespace Company.Function.Infrastructure.Storage
 {
     public class FileLoggingService : ILoggingService
     {
+        private readonly string _logDirectory;
+        private readonly string _logFilePath;
+
+        public FileLoggingService()
+        {
+            _logDirectory = GetLogDirectory();
+            _logFilePath = Path.Combine(_logDirectory, "gamecounter.log");
+
+            EnsureLogDirectoryExists();
+        }
+
         public async Task LogAsync(string message)
         {
-            // subimos 4 carpetas desde /bin/Debug/net8.0
+            var logLine = FormatLogMessage(message);
+            await File.AppendAllTextAsync(_logFilePath, logLine + Environment.NewLine);
+        }
+
+        private static string GetLogDirectory()
+        {
             var projectRootPath = Path.GetFullPath(Path.Combine(Environment.CurrentDirectory, @"..\.."));
+            return Path.Combine(projectRootPath, "Logs");
+        }
 
-            // Crear si no existe
-            var logDirectory = Path.Combine(projectRootPath, "Logs");
-            if (!Directory.Exists(logDirectory))
+        private void EnsureLogDirectoryExists()
+        {
+            if (!Directory.Exists(_logDirectory))
             {
-                Directory.CreateDirectory(logDirectory);
+                Directory.CreateDirectory(_logDirectory);
             }
+        }
 
-            // Define archivo de log
-            var logFilePath = Path.Combine(logDirectory, "gamecounter.log");
-
-            // Construir la línea de log
-            var logLine = $"{DateTime.Now:yyyy-MM-dd HH:mm:ss} - {message}";
-
-            // Guardar en el archivo
-            await File.AppendAllTextAsync(logFilePath, logLine + Environment.NewLine);
+        private static string FormatLogMessage(string message)
+        {
+            return $"{DateTime.Now:yyyy-MM-dd HH:mm:ss} - {message}";
         }
     }
 }
