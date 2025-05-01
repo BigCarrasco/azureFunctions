@@ -13,23 +13,22 @@ public class XboxGameService
     {
         _httpClient = httpClient;
         _logger = logger;
-
     }
 
     public async Task<int> GetTotalGamesAsync()
     {
         var apiUrl = "https://api.sampleapis.com/xbox/games";
-        var apiResponse = await _httpClient.GetAsync(apiUrl);
+        var apiResponse = await _httpClient.GetAsync(apiUrl); //Object Construction
 
         if (!apiResponse.IsSuccessStatusCode)
         {
             _logger.LogError("API FAILED WITH STATUS {statuscode}", apiResponse.StatusCode);
-            return 0; //agrregar o mejorar
+            return 0;
         }
 
         var content = await apiResponse.Content.ReadAsStringAsync();
         var games = JsonSerializer.Deserialize<List<Game>>(content);
 
-        return games?.Count ?? 0;
+        return games?.Count ?? 0; // Null operator
     }
 }
