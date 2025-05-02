@@ -26,7 +26,7 @@ public class XboxGameCounter
         var totalGames = await _xboxGameService.GetTotalGamesAsync();
 
         var response = req.CreateResponse(HttpStatusCode.OK);
-        await response.WriteAsJsonAsync(new { totalGames = totalGames });
+        await response.WriteAsJsonAsync(new { totalGames });
         return response;
     }
 }
