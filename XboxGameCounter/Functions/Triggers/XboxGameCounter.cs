@@ -2,10 +2,6 @@ using Microsoft.Azure.Functions.Worker;
 using Microsoft.Azure.Functions.Worker.Http;
 using Microsoft.Extensions.Logging;
 using System.Net;
-using System.Net.Http;
-using System.Text.Json;
-
-using Company.Function.Domain.Models;
 using Company.Function.Application.Services;
 
 namespace Company.Function.Functions.Triggers;
